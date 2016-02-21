@@ -1,5 +1,7 @@
 # Test Databases
 ## ra.db3
+Just one table.
+
 `datetime`s below are in DateTime.Ticks so a connection string should include `DateTimeFormat=Ticks`.
 
 	CREATE TABLE [rafile] (
@@ -20,6 +22,8 @@
 	);
 93729 rows.
 ## PlanCache.ulog.db3
+Five tables and one view.
+
 `DATETIME`s below are in Unix Epoch (seconds) so a connection string should include `DateTimeFormat=UnixEpoch`.
 
 	CREATE TABLE [uptype] (
