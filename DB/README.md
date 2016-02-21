@@ -7,7 +7,7 @@ Just one table.
 	CREATE TABLE [rafile] (
 		[FileId] INTEGER PRIMARY KEY AUTOINCREMENT,
 		[FileName] text NOT NULL,
-		[MD5] blob,
+		[MD5] blob, -- 16 bytes of MD5SUM of the file.
 		[Packets] bigint NOT NULL,
 		[Bytes] bigint NOT NULL,
 		[FirstTime] datetime NOT NULL,

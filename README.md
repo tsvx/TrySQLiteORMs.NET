@@ -1,6 +1,4 @@
 # TrySQLiteORMs.NET
-Trying out ORM libs for working with SQLite on .NET Framework.
-
 The purpose of this repo is to find out SQLite .NET ORM library that is appropriate for me.
 I need it to be simple, fast, "code first" and, optionally but desirable, to have the ability to generate
 DTO classes from an existing database.
@@ -22,5 +20,5 @@ Two [test databases](DB/README.md) are included.
 
 First, let's make use of the official SQLite .NET wrapper -- [System.Data.SQLite](https://system.data.sqlite.org/).
 
-## NoORM_SystemDataSQLite
+## [NoORM_SystemDataSQLite](NoORM_SystemDataSQLite/README.md)
 Just simple querying with System.Data.SQLite.
