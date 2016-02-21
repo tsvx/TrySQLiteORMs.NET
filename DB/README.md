@@ -1,6 +1,6 @@
 # Test Databases
-
-## RaFiles (`ra.db3`)
+## ra.db3
+`datetime`s below are in DateTime.Ticks so a connection string should include `DateTimeFormat=Ticks`.
 
 	CREATE TABLE [rafile] (
 		[FileId] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,8 +18,9 @@
 		[DstPort] int,
 		[Comment] text
 	);
-
-## PlanCacheUpdateLog (`PlanCache.ulog.db3`)
+93729 rows.
+## PlanCache.ulog.db3
+`DATETIME`s below are in Unix Epoch (seconds) so a connection string should include `DateTimeFormat=UnixEpoch`.
 
 	CREATE TABLE [uptype] (
 		[upt] INT PRIMARY KEY NOT NULL,
@@ -27,8 +28,9 @@
 	);
 
 Static table (dictionary), its data is:
+
 upt | upstr  
-------------
+----|-------
 0   | nothing
 1   | equal  
 2   | minor  
@@ -38,7 +40,6 @@ upt | upstr
 6   | removed
 7   | changed
 
-	
 	CREATE TABLE [commands] (
 		[cid] INTEGER PRIMARY KEY AUTOINCREMENT,
 		[time] DATETIME NOT NULL,
@@ -49,6 +50,7 @@ upt | upstr
 		[input] TEXT,
 		[upt] INT REFERENCES uptype
 	);
+55866 rows.
 
 	CREATE TABLE [errors] (
 		[cid] INTEGER REFERENCES commands,
@@ -59,6 +61,7 @@ upt | upstr
 		[msg] TEXT NOT NULL,
 		[desc] TEXT
 	);
+50 rows.
 
 	CREATE TABLE [updates] (
 		[uid] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,6 +69,7 @@ upt | upstr
 		[sid] INT NOT NULL,
 		[upt] REFERENCES uptype
 	);
+57427 rows.
 
 	CREATE TABLE [new_sessions] (
 		[uid] INTEGER REFERENCES updates NOT NULL,
@@ -88,3 +92,16 @@ upt | upstr
 		[zone_comment] TEXT,
 		[display] BOOLEAN
 	);
+315438 rows.
+
+	CREATE VIEW print AS SELECT
+		session_id, orbit,
+		datetime(date,'unixepoch') AS start_date,
+		time(end_date,'unixepoch') AS end_date,
+		board, board_code, nip_name, nip_num, input, mode, priority,
+		datetime(start_time,'unixepoch') AS start_time,
+		time(end_time,'unixepoch') as end_time,
+		datetime(real_time,'unixepoch') AS real_time
+	FROM sskp_sessions
+	WHERE mode <> 'ВП' AND nip_num > 0 AND board_code NOT NULL
+81634 rows.
